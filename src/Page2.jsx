@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export const Page2 = () => {
   return (
     <div>
