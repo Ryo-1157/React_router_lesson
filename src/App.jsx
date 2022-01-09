@@ -25,15 +25,16 @@ export default function App() {
           </Route>
           <Route
             path="/page1"
-            render={() => (
+            render={({ match: { url } }) => (
               <Switch>
-                <Route exact path="/page1">
+                {console.log(url)}
+                <Route exact path={url}>
                   <Page1 />
                 </Route>
-                <Route exact path="/page1/page1detailA">
+                <Route exact path={`${url}/page1detailA`}>
                   <Page1DetailA />
                 </Route>
-                <Route exact path="/page1/page1detailB">
+                <Route exact path={`${url}/page1detailB`}>
                   <Page1DetailB />
                 </Route>
               </Switch>
