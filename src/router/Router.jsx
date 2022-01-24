@@ -1,9 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import { Home } from "../Home";
-import { Page1 } from "../Page1";
-import { Page2 } from "../Page2";
-import { Page1DetailA } from "../Page1DetailA";
-import { Page1DetailB } from "../Page1DetailB";
+import { Page1Routes } from "./Page1Routes";
+import { Page2Routes } from "./Page2Routes";
 
 export const Router = () => {
   return (
@@ -13,24 +11,40 @@ export const Router = () => {
       </Route>
       <Route
         path="/page1"
+        // renderingの中身ここから
         render={({ match: { url } }) => (
           <Switch>
-            {console.log(url)}
-            <Route exact path={url}>
-              <Page1 />
-            </Route>
-            <Route exact path={`${url}/page1detailA`}>
-              <Page1DetailA />
-            </Route>
-            <Route exact path={`${url}/page1detailB`}>
-              <Page1DetailB />
-            </Route>
+            {Page1Routes.map((route) => (
+              <Route
+                key={route.path}
+                exact={route.exact}
+                path={`${url}${route.path}`}
+              >
+                {route.children}
+              </Route>
+            ))}
           </Switch>
         )}
+        // renderingの中身ここまで
       />
-      <Route path="/page2">
-        <Page2></Page2>
-      </Route>
+      <Route
+        path="/page2"
+        // renderingの中身ここから
+        render={({ match: { url } }) => (
+          <Switch>
+            {Page2Routes.map((route) => (
+              <Route
+                key={route.path}
+                exact={route.exact}
+                path={`${url}${route.path}`}
+              >
+                {route.children}
+              </Route>
+            ))}
+          </Switch>
+        )}
+        // renderingの中身ここまで
+      />
     </Switch>
   );
 };
